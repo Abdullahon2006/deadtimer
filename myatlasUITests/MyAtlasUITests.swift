@@ -7,5 +7,6 @@ final class MyAtlasUITests: XCTestCase {
 
         XCTAssertTrue(app.staticTexts["myatlas"].waitForExistence(timeout: 3))
         XCTAssertTrue(app.staticTexts["Offline atlas"].exists)
+        XCTAssertTrue(app.buttons["save-place-button"].exists)
     }
 }

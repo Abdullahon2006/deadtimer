@@ -11,6 +11,11 @@ myatlas is a private, offline-first personal atlas for remembering the places th
 - Chronological travel history
 - Foreground-only, opt-in route recording
 
+The current vertical slice includes a shared local atlas session, seeded preview content,
+download progress for candidate regions, saving a place with a memory, and a history
+timeline. The map surface is intentionally a provider boundary until a licensed
+offline tile/style distribution is selected.
+
 Accounts, social sharing, cloud sync, background tracking, and friend discovery are intentionally outside the first release.
 
 ## Repository layout

@@ -23,4 +23,19 @@ final class AtlasStoreTests: XCTestCase {
 
         XCTAssertEqual(places.map(\.name), ["Porto", "Lisbon"])
     }
+
+    func testRegionCanBeUpdatedAndRemoved() async {
+        let region = AtlasRegion(name: "Kyoto", countryCode: "JP", mapPackageSize: 100)
+        let store = AtlasStore(regions: [region])
+
+        var downloaded = region
+        downloaded.downloadState = .downloaded
+        await store.update(region: downloaded)
+        let updatedRegions = await store.allRegions()
+        XCTAssertEqual(updatedRegions.first?.downloadState, .downloaded)
+
+        await store.remove(regionID: region.id)
+        let remainingRegions = await store.allRegions()
+        XCTAssertTrue(remainingRegions.isEmpty)
+    }
 }
