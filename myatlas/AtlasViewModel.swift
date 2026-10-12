@@ -6,8 +6,10 @@ final class AtlasViewModel: ObservableObject {
     @Published private(set) var regions: [AtlasRegion]
     @Published private(set) var places: [Place]
     @Published private(set) var entries: [JournalEntry]
+    @Published private(set) var attachments: [PlaceAttachment] = []
 
     private let store: AtlasStore
+    private let mediaStore: MediaStore?
     private var downloadTasks: [UUID: Task<Void, Never>] = [:]
 
     init(store: AtlasStore? = nil) {
@@ -31,6 +33,7 @@ final class AtlasViewModel: ObservableObject {
             )
         ]
         self.store = store ?? AtlasStore(regions: seedRegions, places: seedPlaces)
+        self.mediaStore = try? MediaStore()
         self.regions = seedRegions
         self.places = seedPlaces
         self.entries = []
@@ -79,6 +82,23 @@ final class AtlasViewModel: ObservableObject {
         entries.insert(entry, at: 0)
         Task {
             await store.add(entry: entry)
+        }
+    }
+
+    func addPhoto(_ data: Data, to place: Place) {
+        guard let mediaStore else { return }
+        let attachment = PlaceAttachment(
+            placeID: place.id,
+            kind: .photo,
+            filename: "\(UUID().uuidString).jpg"
+        )
+        attachments.insert(attachment, at: 0)
+        Task {
+            do {
+                _ = try await mediaStore.save(data, filename: attachment.filename)
+            } catch {
+                attachments.removeAll { $0.id == attachment.id }
+            }
         }
     }
 

@@ -73,3 +73,30 @@ public struct JournalEntry: Identifiable, Codable, Equatable, Sendable {
         self.createdAt = createdAt
     }
 }
+
+public enum AttachmentKind: String, Codable, Sendable {
+    case photo
+    case voice
+}
+
+public struct PlaceAttachment: Identifiable, Codable, Equatable, Sendable {
+    public let id: UUID
+    public let placeID: UUID
+    public let kind: AttachmentKind
+    public let filename: String
+    public let createdAt: Date
+
+    public init(
+        id: UUID = UUID(),
+        placeID: UUID,
+        kind: AttachmentKind,
+        filename: String,
+        createdAt: Date = .now
+    ) {
+        self.id = id
+        self.placeID = placeID
+        self.kind = kind
+        self.filename = filename
+        self.createdAt = createdAt
+    }
+}

@@ -1,4 +1,5 @@
 import SwiftUI
+import PhotosUI
 
 struct AtlasHomeView: View {
     @EnvironmentObject private var atlas: AtlasViewModel
@@ -203,6 +204,8 @@ private struct AddPlaceSheet: View {
     @State private var name = ""
     @State private var subtitle = ""
     @State private var note = ""
+    @State private var selectedPhoto: PhotosPickerItem?
+    @State private var photoData: Data?
 
     var body: some View {
         NavigationStack {
@@ -215,16 +218,30 @@ private struct AddPlaceSheet: View {
                     TextField("What do you want to remember?", text: $note, axis: .vertical)
                         .lineLimit(3...6)
                 }
+                Section("Photo") {
+                    PhotosPicker(selection: $selectedPhoto, matching: .images) {
+                        Label(photoData == nil ? "Choose a photo" : "Photo selected", systemImage: "photo")
+                    }
+                    .onChange(of: selectedPhoto) {
+                        Task {
+                            photoData = try? await selectedPhoto?.loadTransferable(type: Data.self)
+                        }
+                    }
+                }
                 Section {
                     Button("Save place") {
-                        atlas.add(place: Place(
+                        let place = Place(
                             name: name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Pinned place" : name,
                             subtitle: subtitle.isEmpty ? "Saved offline" : subtitle,
                             latitude: 0,
                             longitude: 0,
                             visitedAt: .now,
                             note: note.isEmpty ? nil : note
-                        ))
+                        )
+                        atlas.add(place: place)
+                        if let photoData {
+                            atlas.addPhoto(photoData, to: place)
+                        }
                         dismiss()
                     }
                     .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)

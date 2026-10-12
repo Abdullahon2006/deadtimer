@@ -14,6 +14,7 @@
 		4A5E670522EDB1DF06334C94 /* AtlasStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE40963DE33599491E99FB12 /* AtlasStore.swift */; };
 		5E39B9D2F701B528686C99BF /* MapLibre in Frameworks */ = {isa = PBXBuildFile; productRef = 3F1162BF30A0D6D0300D92BD /* MapLibre */; };
 		6F59A447CB253F5BD13ED790 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DE6D99FDC7E2218AAED3D2 /* Models.swift */; };
+		742FEBAE9A072AFA7ECC9FDE /* MediaStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF842BCBBD06E688E130B3C /* MediaStore.swift */; };
 		7F631E20299141581A96C3A9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 34C4FB7BAD4D05D370305F7F /* README.md */; };
 		8423101EC7789C7710EC2B5E /* MyAtlasAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2176FCB010B3F53E804F00 /* MyAtlasAppTests.swift */; };
 		8A2627A6471CA4165FF8599D /* AtlasHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CAAA76628C9C99DD594B6 /* AtlasHomeView.swift */; };
@@ -55,6 +56,7 @@
 		A75A1BF73FCD12A859001338 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		A86925986698D091FC47C299 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		BE2118228B1AB071E506116D /* myatlasTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = myatlasTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEF842BCBBD06E688E130B3C /* MediaStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaStore.swift; sourceTree = "<group>"; };
 		CCDDCA0AEC817341C0DF696A /* AtlasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtlasViewModel.swift; sourceTree = "<group>"; };
 		EE40963DE33599491E99FB12 /* AtlasStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtlasStore.swift; sourceTree = "<group>"; };
 		FC2176FCB010B3F53E804F00 /* MyAtlasAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAtlasAppTests.swift; sourceTree = "<group>"; };
@@ -98,6 +100,14 @@
 			);
 			sourceTree = "<group>";
 		};
+		442392B56750D31700D58C51 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				BEF842BCBBD06E688E130B3C /* MediaStore.swift */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
 		52CB263D1133B17575F259C1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				5B4B73CBD97A30C60E7C5B5A /* Maps */,
+				442392B56750D31700D58C51 /* Media */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -312,6 +323,7 @@
 				9EDA0EF188C5FF12E9A9339F /* ContentView.swift in Sources */,
 				439714AA5107F9B6F27B04DE /* HistoryView.swift in Sources */,
 				0FDE337200BFCC6FFBE4FB1D /* MapProvider.swift in Sources */,
+				742FEBAE9A072AFA7ECC9FDE /* MediaStore.swift in Sources */,
 				6F59A447CB253F5BD13ED790 /* Models.swift in Sources */,
 				FAE9D6EB7D3AC434B3BC3F36 /* Theme.swift in Sources */,
 				FCB74B11381920AA5293AC4D /* myatlasApp.swift in Sources */,
