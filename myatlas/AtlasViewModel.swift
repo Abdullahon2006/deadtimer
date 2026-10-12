@@ -6,7 +6,7 @@ final class AtlasViewModel: ObservableObject {
     @Published private(set) var regions: [AtlasRegion]
     @Published private(set) var places: [Place]
     @Published private(set) var entries: [JournalEntry]
-    @Published private(set) var attachments: [PlaceAttachment] = []
+    @Published private(set) var attachments: [PlaceAttachment]
 
     private let store: AtlasStore
     private let mediaStore: MediaStore?
@@ -32,11 +32,16 @@ final class AtlasViewModel: ObservableObject {
                 attachmentCount: 2
             )
         ]
-        self.store = store ?? AtlasStore(regions: seedRegions, places: seedPlaces)
+        self.store = store ?? AtlasStore(
+            regions: seedRegions,
+            places: seedPlaces,
+            persistenceURL: AtlasStore.defaultPersistenceURL
+        )
         self.mediaStore = try? MediaStore()
-        self.regions = seedRegions
-        self.places = seedPlaces
-        self.entries = []
+        self.regions = self.store.initialRegions
+        self.places = self.store.initialPlaces
+        self.entries = self.store.initialEntries
+        self.attachments = self.store.initialAttachments
     }
 
     var downloadedRegions: [AtlasRegion] {
@@ -96,6 +101,7 @@ final class AtlasViewModel: ObservableObject {
         Task {
             do {
                 _ = try await mediaStore.save(data, filename: attachment.filename)
+                await store.add(attachment: attachment)
             } catch {
                 attachments.removeAll { $0.id == attachment.id }
             }

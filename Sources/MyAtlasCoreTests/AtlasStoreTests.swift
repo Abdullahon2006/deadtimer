@@ -38,4 +38,24 @@ final class AtlasStoreTests: XCTestCase {
         let remainingRegions = await store.allRegions()
         XCTAssertTrue(remainingRegions.isEmpty)
     }
+
+    func testStoreRestoresPersistedSnapshot() async throws {
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent("\(UUID().uuidString).json")
+        defer { try? FileManager.default.removeItem(at: url) }
+
+        let place = Place(
+            name: "Reykjavik",
+            subtitle: "Iceland",
+            latitude: 64.1466,
+            longitude: -21.9426,
+            visitedAt: .now
+        )
+        let firstStore = AtlasStore(persistenceURL: url)
+        await firstStore.add(place: place)
+
+        let restoredStore = AtlasStore(persistenceURL: url)
+        let restoredPlaces = await restoredStore.allPlaces()
+        XCTAssertEqual(restoredPlaces.map(\.name), ["Reykjavik"])
+    }
 }

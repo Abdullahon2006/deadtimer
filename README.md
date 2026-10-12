@@ -11,9 +11,10 @@ myatlas is a private, offline-first personal atlas for remembering the places th
 - Chronological travel history
 - Foreground-only, opt-in route recording
 
-The current vertical slice includes a shared local atlas session, seeded preview content,
-download progress for candidate regions, saving a place with a memory or photo, and a
-history timeline. Photos are written to the app's Application Support directory. The map
+The current vertical slice includes a shared local atlas session, persisted atlas data,
+seeded preview content, download progress for candidate regions, saving a place with a
+memory or photo, and a history timeline. Atlas metadata is stored as a local JSON
+snapshot and photos are written to the app's Application Support directory. The map
 surface is intentionally a provider boundary until a licensed offline tile/style
 distribution is selected.
 
