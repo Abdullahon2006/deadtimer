@@ -9,7 +9,7 @@ struct AtlasHomeView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 22) {
+                VStack(alignment: .leading, spacing: 18) {
                     header
                     mapSurface
                     SectionHeading(title: "Downloaded regions", action: "Manage")
@@ -17,7 +17,9 @@ struct AtlasHomeView: View {
                     SectionHeading(title: "Recent places", action: "See all")
                     recentPlaces
                 }
-                .padding(20)
+                .padding(.horizontal, 16)
+                .padding(.top, 12)
+                .padding(.bottom, 24)
             }
             .background(MyAtlasTheme.paper.ignoresSafeArea())
             .navigationBarHidden(true)
@@ -34,20 +36,22 @@ struct AtlasHomeView: View {
 
     private var header: some View {
         HStack(alignment: .bottom) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text("myatlas")
-                    .font(.system(size: 36, weight: .black, design: .serif))
+                    .font(.system(size: 28, weight: .bold, design: .serif))
                 Text("Your places, kept close.")
-                    .font(.subheadline)
+                    .font(.subheadline.weight(.medium))
                     .foregroundStyle(MyAtlasTheme.moss)
             }
             Spacer()
             Button {
                 isShowingRegionSheet = true
             } label: {
-                Image(systemName: "arrow.down.circle.fill")
-                    .font(.title2)
-                    .foregroundStyle(MyAtlasTheme.clay)
+                Image(systemName: "arrow.down")
+                    .font(.headline.weight(.bold))
+                    .foregroundStyle(.white)
+                    .frame(width: 40, height: 40)
+                    .background(MyAtlasTheme.clay, in: Circle())
             }
             .accessibilityLabel("Download a map region")
         }
@@ -57,17 +61,17 @@ struct AtlasHomeView: View {
         ZStack(alignment: .bottomLeading) {
             RoundedRectangle(cornerRadius: 18)
                 .fill(MyAtlasTheme.mist)
-                .frame(height: 248)
+                .frame(height: 190)
                 .overlay {
                     Image(systemName: "map.fill")
-                        .font(.system(size: 48))
+                        .font(.system(size: 42, weight: .medium))
                         .foregroundStyle(MyAtlasTheme.moss.opacity(0.35))
                 }
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 6) {
                 Label("Offline atlas", systemImage: "checkmark.shield.fill")
                     .font(.caption.weight(.bold))
                 Text("\(atlas.downloadedRegions.count) region\(atlas.downloadedRegions.count == 1 ? "" : "s") ready offline")
-                    .font(.headline)
+                    .font(.title3.weight(.semibold))
             }
             .foregroundStyle(MyAtlasTheme.ink)
             .padding(18)
@@ -90,7 +94,7 @@ struct AtlasHomeView: View {
                 }
             }
         }
-        .padding(16)
+        .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.white.opacity(0.62), in: RoundedRectangle(cornerRadius: 14))
     }
@@ -123,7 +127,7 @@ private struct RegionRow: View {
                 .frame(width: 42, height: 42)
                 .background(MyAtlasTheme.clay.opacity(0.14), in: RoundedRectangle(cornerRadius: 12))
             VStack(alignment: .leading, spacing: 3) {
-                Text(region.name).font(.headline)
+                Text(region.name).font(.subheadline.weight(.semibold))
                 Text(region.downloadState.label)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
@@ -151,7 +155,7 @@ private struct PlaceRow: View {
                 .font(.title2)
                 .foregroundStyle(MyAtlasTheme.moss)
             VStack(alignment: .leading, spacing: 3) {
-                Text(place.name).font(.headline)
+                Text(place.name).font(.subheadline.weight(.semibold))
                 Text(place.subtitle).font(.subheadline).foregroundStyle(.secondary)
             }
             Spacer()

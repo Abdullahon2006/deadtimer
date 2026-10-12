@@ -6,10 +6,10 @@ struct HistoryView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 22) {
+                VStack(alignment: .leading, spacing: 18) {
                     VStack(alignment: .leading, spacing: 5) {
                         Text("History")
-                            .font(.system(size: 36, weight: .black, design: .serif))
+                            .font(.system(size: 28, weight: .bold, design: .serif))
                         Text("A quiet record of where life took you.")
                             .foregroundStyle(MyAtlasTheme.moss)
                     }
@@ -28,7 +28,9 @@ struct HistoryView: View {
                         }
                     }
                 }
-                .padding(20)
+                .padding(.horizontal, 16)
+                .padding(.top, 12)
+                .padding(.bottom, 24)
             }
             .background(MyAtlasTheme.paper.ignoresSafeArea())
             .navigationBarHidden(true)
@@ -39,13 +41,13 @@ struct HistoryView: View {
         let place: Place
 
         var body: some View {
-            HStack(alignment: .top, spacing: 14) {
+            HStack(alignment: .top, spacing: 12) {
                 VStack(spacing: 4) {
-                    Circle().fill(MyAtlasTheme.clay).frame(width: 10, height: 10)
-                    Rectangle().fill(MyAtlasTheme.mist).frame(width: 2, height: 52)
+                    Circle().fill(MyAtlasTheme.clay).frame(width: 8, height: 8)
+                    Rectangle().fill(MyAtlasTheme.mist).frame(width: 2, height: 48)
                 }
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(place.name).font(.headline)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(place.name).font(.subheadline.weight(.semibold))
                     Text(place.subtitle).font(.subheadline).foregroundStyle(.secondary)
                     if let note = place.note {
                         Text(note).font(.subheadline).foregroundStyle(MyAtlasTheme.moss)
