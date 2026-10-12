@@ -1,0 +1,1 @@
+Place the map style, app icons, and other Xcode-managed assets in this directory.

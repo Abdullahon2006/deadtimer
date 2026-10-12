@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>myatlas</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>myatlas uses your location to help you save places you visit.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>myatlas uses the camera so you can attach photos to places.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>myatlas uses the microphone so you can attach voice notes to places.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>myatlas accesses photos you choose to attach to places.</string>
+</dict>
+</plist>
